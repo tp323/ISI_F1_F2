@@ -122,7 +122,7 @@ PESSOA por questões de simplificação.
 email nvarchar(60) O valor ´e do tipo“{C}@{C}”, onde C representa caracter.
 nome nvarchar(150)
 continua na próxima página
-14
+
 Atributo Tipo Restrições Integridade
 dtnascimento date A pessoa deve ter no mínimo 18 anos de idade à data
 actual.
@@ -136,27 +136,34 @@ localidade nvarchar(150)
 profissao varchar(100)
 equipa int FK referência de EQUIPA.{codigo}
 empresa int FK referência de EMPRESA.{id}.
-TEL EMPRESA
-TEL EMPRESA(empresa, telefone).
-Atributo Tipo Restrições Integridade
-empresa int FK referência de EMPRESA.{id}.
-telefone varchar(10) Representa o número de telefone fixo ou móvel da empresa.
-TEL PESSOA
-TEL PESSOA(pessoa, telefone).
-Atributo Tipo Restrições Integridade
-pessoa int FK referência de PESSOA.{id}.
-telefone varchar(10) Representa o número de telefone fixo ou móvel de pessoa.
-15
-VCOMERCIAL
-VCOMERCIAL(dtvcomercial, activo, valor).
+
+**TEL EMPRESA**
+TEL EMPRESA(*empresa, telefone*).
+
+| Atributo | Tipo        | Restrições Integridade                                    |
+| -------- | ----------- | --------------------------------------------------------- |
+| empresa  | int         | FK referência de EMPRESA.{id}.                            |
+| telefone | varchar(10) | Representa o número de telefone fixo ou móvel da empresa. |
 
 
 
-| Atributo     | Tipo | Restrições                  | Integridade                                                  |
-| ------------ | ---- | --------------------------- | ------------------------------------------------------------ |
-| dtvcomercial | date | Tem o formato “dd-mm-aaaa”. | Valor deve ser igual ou superior à data de aquisição do activo (dtaquisicao). |
+**TEL PESSOA**
+TEL PESSOA(*pessoa, telefone*).
+
+| Atributo | Tipo        | Restrições Integridade                                   |
+| -------- | ----------- | -------------------------------------------------------- |
+| pessoa   | int         | FK referência de PESSOA.{id}.                            |
+| telefone | varchar(10) | Representa o número de telefone fixo ou móvel de pessoa. |
 
 
 
-activo varchar(5) FK referência de ACTIVO.{id}.
-valor decimal(6,2) Valor em euros.
+**VCOMERCIAL**
+VCOMERCIAL(<u>dtvcomercial, activo</u>, valor).
+
+| Atributo     | Tipo         | Restrições Integridade                                       |
+| ------------ | ------------ | ------------------------------------------------------------ |
+| dtvcomercial | date         | Tem o formato “dd-mm-aaaa”.Valor deve ser igual ou superior à data de aquisição do activo (dtaquisicao). |
+| activo       | varchar(5)   | FK referência de ACTIVO.{id}.                                |
+| valor        | decimal(6,2) | Valor em euros.                                              |
+
+
