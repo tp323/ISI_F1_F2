@@ -108,6 +108,7 @@ ACTIVO(*id*, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo
 | pessoa       | int           | FK referência de PESSOA.{id}. Pessoa que gere o activo não pode fazer parte da equipa de manutenção deste. |
 
 Todos os campos são obrigatórios com excepção de modelo e marca.
+
 **ACTIVOTIPO**
 ACTIVOTIPO(*id*, descricao).
 
