@@ -97,6 +97,7 @@ ACTIVO(*id*, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo
 | ------------ | ------------- | ------------------------------------------------------------ |
 | id           | varchar(5)    | O primeiro caracter corresponde a uma letra seguida de dígitos. |
 | nome         | varchar(50)   | estado bit “0” corresponde a desactivado e “1” a operacional. |
+| estado       | bit           | “0” corresponde a desactivado e “1” a operacional.           |
 | dtaquisicao  | date          | Tem o formato “dd-mm-aaaa”.                                  |
 | modelo       | nvarchar(100) |                                                              |
 | marca        | nvarchar(75)  |                                                              |
