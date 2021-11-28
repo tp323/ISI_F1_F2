@@ -91,6 +91,7 @@ Todos os atributos são obrigatórios nas relações, excepto quando indicado o 
 
 
 **ACTIVO**
+
 ACTIVO(*id*, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa).
 
 | Atributo     | Tipo          | Restrições Integridade                                       |
@@ -110,6 +111,7 @@ ACTIVO(*id*, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo
 Todos os campos são obrigatórios com excepção de modelo e marca.
 
 **ACTIVOTIPO**
+
 ACTIVOTIPO(*id*, descricao).
 
 | Atributo  | Tipo         | Restrições Integridade |
@@ -118,6 +120,7 @@ ACTIVOTIPO(*id*, descricao).
 | descrição | nvarchar(50) |                        |
 
 **COMPETENCIA**
+
 COMPETENCIA(*id*, descricao).
 
 | Atributo  | Tipo         | Restrições Integridade |
@@ -126,6 +129,7 @@ COMPETENCIA(*id*, descricao).
 | descricao | nvarchar(50) |                        |
 
 **COMP PESSOA**
+
 COMP PESSOA(*pessoa, competencia*).
 
 | Atributo    | Tipo | Restrições Integridade             |
@@ -134,6 +138,7 @@ COMP PESSOA(*pessoa, competencia*).
 | competencia | int  | FK referência de COMPETENCIA.{id}. |
 
 **EMPRESA**
+
 EMPRESA(*id*, url, nipc, nome, morada, codpostal, localidade).
 
 | Atributo   | Tipo          | Restrições Integridade                                       |
@@ -146,6 +151,7 @@ EMPRESA(*id*, url, nipc, nome, morada, codpostal, localidade).
 | localidade | nvarchar(150) |                                                              |
 
 **EQUIPA**
+
 EQUIPA(*codigo*, localizacao, responsavel).
 
 | Atributo    | Tipo         | Restrições Integridade        |
@@ -155,12 +161,13 @@ EQUIPA(*codigo*, localizacao, responsavel).
 | responsavel | int          | FK referência de PESSOA.{id}. |
 
 **INTERVENCAO**
+
 INTERVENCAO(*no*, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc).
 
 | Atributo  | Tipo         | Restrições Integridade                                       |
 | --------- | ------------ | ------------------------------------------------------------ |
-| no        | int          | Valor sequencial. descricao nvarchar(75) Pode tomar como valores “rutura”, “inspecção” ou similar. |
-| descricao | nvarchar(75) | Pode tomar como valores “rutura”, “inspec¸c˜ao” ou<br/>similar. |
+| no        | int          | Valor sequencial.                                            |
+| descricao | nvarchar(75) | Pode tomar como valores “rutura”, “inspecção” ou similar.    |
 | estado    | int          | Toma os valores “em análise”, “em execução” ou “concluído”.  |
 | dtinicio  | date         | Tem o formato “dd-mm-aaaa”. Valor deve ser superior à data de aquisição do activo (dtaquisicao). O atributo estado não pode ter como valor “concluído”. |
 | dtfim     | date         | Tem o formato “dd-mm-aaaa”. Valor superior a dtinicio. O atributo estado deve passar a “concluído”. |
@@ -169,6 +176,7 @@ INTERVENCAO(*no*, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
 | atrdisc   | char(2)      | Atributo discriminante que contém “P” para representar as intervenções periódicas e “NP” as não periódicas |
 
 **INTER EQUIPA**
+
 INTER EQUIPA(*intervencao, equipa*).
 
 | Atributo    | Tipo | Restrições Integridade             |
@@ -177,6 +185,7 @@ INTER EQUIPA(*intervencao, equipa*).
 | equipa      | int  | FK referência de EQUIPA.{id}.      |
 
 **INTER PERIODICA**
+
 INTER PERIODICA(*intervencao, periodicidade*).
 
 | Atributo      | Tipo | Restrições Integridade             |
@@ -185,6 +194,7 @@ INTER PERIODICA(*intervencao, periodicidade*).
 | periodicidade | int  | Valor corresponde ao n. de meses.  |
 
 **PESSOA**
+
 PESSOA(*id*, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa).
 
 | Atributo     | Tipo          | Restrições Integridade                                       |
@@ -202,6 +212,7 @@ PESSOA(*id*, email, nome, dtnascimento, noident, morada, codpostal, localidade, 
 | empresa      | int           | FK referência de EMPRESA.{id}.                               |
 
 **TEL EMPRESA**
+
 TEL EMPRESA(*empresa, telefone*).
 
 | Atributo | Tipo        | Restrições Integridade                                    |
@@ -210,6 +221,7 @@ TEL EMPRESA(*empresa, telefone*).
 | telefone | varchar(10) | Representa o número de telefone fixo ou móvel da empresa. |
 
 **TEL PESSOA**
+
 TEL PESSOA(*pessoa, telefone*).
 
 | Atributo | Tipo        | Restrições Integridade                                   |
@@ -218,6 +230,7 @@ TEL PESSOA(*pessoa, telefone*).
 | telefone | varchar(10) | Representa o número de telefone fixo ou móvel de pessoa. |
 
 **VCOMERCIAL**
+
 VCOMERCIAL(*dtvcomercial, activo*, valor).
 
 | Atributo     | Tipo         | Restrições Integridade                                       |
