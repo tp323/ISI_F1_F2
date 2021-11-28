@@ -27,7 +27,7 @@ No final da segunda fase do trabalho, os alunos devem ser capazes de:
 
 
 Após a realização da 1ª fase do trabalho segue-se a implementação do modelo físico do
-sistema, i.e. deverá ser construído em PostgreSQL contemplando todas as restric~oes que
+sistema, i.e. deverá ser construído em PostgreSQL contemplando todas as restrições que
 consigam garantir na forma declarativa.
 **Nota**: Deverão preencher a base de dados com informação necessária que permita em seguida realizar interrogações que apresentem resultados pertinentes. Na etapa de preenchimento da base de dados, os alunos deverão ter particular atenção ao cumprimento das restrições de integridade, utilizando de forma adequada o controlo transaccional (a atomicidade).
 
@@ -35,35 +35,52 @@ consigam garantir na forma declarativa.
 Tendo em conta os objectivos de aprendizagem, deverão ser produzidos os seguintes resultados:
 
 1. Construção do modelo físico do sistema, contemplando todas as restrições de integridade passíveis de ser garantidas declarativamente, assim como a atomicidade nas operações.
-    O código PostgreSQL que permite:
-    (a) Criar o modelo físico (1 script autonomo): \createTable.sql";
-    (b) Remover o modelo físico (1 script autonomo): \removeTable.sql";
-    (c) Preenchimento inicial da base de dados (1 script autónomo): \insertTable.sql";
-    (d) Apagar todos os dados existentes nas tabelas (1 script autónomo): \deleteTable.sql".
-    Os dados introduzidos devem permitir validar todas as interrogações pedidas nesta fase do trabalho.
+  O código PostgreSQL que permite:
+  
+  (a) Criar o modelo físico (1 script autónomo): \createTable.sql";
+  
+  (b) Remover o modelo físico (1 script autónomo): \removeTable.sql";
+  
+  (c) Preenchimento inicial da base de dados (1 script autónomo): \insertTable.sql";
+  
+  (d) Apagar todos os dados existentes nas tabelas (1 script autónomo): \deleteTable.sql".
+  
+  Os dados introduzidos devem permitir validar todas as interrogações pedidas nesta fase do trabalho.
 
-2. Considerando o esquema relacional obtido anteriormente e fornecido no nal deste documento ("Adenda"), apresente as expressões em álgebra relacional (AR) que respondam às seguintes alíneas. Por forma a recorrer a todos os operadores, sugere-se que (sempre que possível) apresente 2 soluções alternativas para a mesma questão.
-    (a) Pretende-se o registo de todos as activos (nome, modelo, marca e localização) que se encontram em funcionamento.
-    (b) Liste todas as pessoas (nome, email e profissão) agrupadas por competência.
-    (c) Apresente a lista de empresas (nome, nipc e url) juntamente com o número total de empregados registados.
-    (d) Liste as pessoas que estão a realizar a intervenção na \válvula de ar condicionado" ou que gere esse activo.
-    (e) Pretende-se saber o nome de todos os activos que o \Manuel Fernandes" geriu ou fez intervenção.
-    (f) Apresente o numero de elementos de uma equipa por intervenção.
+2. Considerando o esquema relacional obtido anteriormente e fornecido no final deste documento ("Adenda"), apresente as expressões em álgebra relacional (AR) que respondam às seguintes alíneas. Por forma a recorrer a todos os operadores, sugere-se que (sempre que possível) apresente 2 soluções alternativas para a mesma questão.
+
+  (a) Pretende-se o registo de todos as activos (nome, modelo, marca e localização) que se encontram em funcionamento.
+  
+  (b) Liste todas as pessoas (nome, email e profissão) agrupadas por competência.
+  
+  (c) Apresente a lista de empresas (nome, nipc e url) juntamente com o número total de empregados registados.
+  
+  (d) Liste as pessoas que estão a realizar a intervenção na \válvula de ar condicionado" ou que gere esse activo.
+  
+  (e) Pretende-se saber o nome de todos os activos que o \Manuel Fernandes" geriu ou fez intervenção.
+  
+  (f) Apresente o numero de elementos de uma equipa por intervenção.
 
 3. Conceba, na linguagem PostgreSQL, as interrogações que produzam os resultados a seguir indicados, utilizando apenas uma instrução PostgreSQL. Guarde num script autónomo de nome \queries.sql". Para cada instrução deve ser também apresentada a descrição do raciocínio seguido.
-    (a) Implemente em PostgreSQL as interrogações pedidas na alínea 2 (Pode escolher uma das soluções que apresentou acima, deste que nesta fase consiga fazer uso de todos os operadores).
-    (b) Apresente o nome de todos os activos por tipo, deve apresentar a lista dos nomes por ordem alfabética (em primeiro lugar) e a data de aquisição.
-    (c) Identique todos os responsáveis de equipa que são (ou foram) gestores de pelo menos um activo. O resultado deve apresentar o nome, um n. de telefone (móvel ou fixo) e a profissão.
-    (d) Liste todas as intervenções programadas para daqui a um mês (faça uso das funções temporais). O resultado deve identicar o activo (id e nome) e a descrição de intervenção a realizar.
-    (e) Crie uma vista que permita obter informação sobre as equipas que realizaram intervenções no ano passado (deve fazer uso de uma função de datetime e não xar o valor 2021) e seus elementos (nome e profissão). Identique as intervenções por periódicas e não periódicas.
-    (f) Crie uma vista que permita obter informação sobre o custo total em intervenções por activo e o valor comercial deste à data. A vista deve conter o identicador, o nome do activo, a data actual, o valor comercial e o valor total de intervenções realizadas.
+
+  (a) Implemente em PostgreSQL as interrogações pedidas na alínea 2 (Pode escolher uma das soluções que apresentou acima, deste que nesta fase consiga fazer uso de todos os operadores).
+  
+  (b) Apresente o nome de todos os activos por tipo, deve apresentar a lista dos nomes por ordem alfabética (em primeiro lugar) e a data de aquisição.
+  
+  (c) Identifique todos os responsáveis de equipa que são (ou foram) gestores de pelo menos um activo. O resultado deve apresentar o nome, um n. de telefone (móvel ou fixo) e a profifissão.
+  
+  (d) Liste todas as intervenções programadas para daqui a um mês (faça uso das funções temporais). O resultado deve identificar o activo (id e nome) e a descrição de intervenção a realizar.
+  
+  (e) Crie uma vista que permita obter informação sobre as equipas que realizaram intervenções no ano passado (deve fazer uso de uma função de datetime e não fixar o valor 2021) e seus elementos (nome e profissão). Identifique as intervenções por periódicas e não periódicas.
+  
+  (f) Crie uma vista que permita obter informação sobre o custo total em intervenções por activo e o valor comercial deste à data. A vista deve conter o identificador, o nome do activo, a data actual, o valor comercial e o valor total de intervenções realizadas.
 
 4. Apresente o(s) comando(s) que permitem inserir na BD a seguinte informação: Substituição de uma válvula de um ar condicionado, localizado no gabinete da direcção do Complexo de Piscinas. O valor dessa intervenção é de 150 euros. Afectem essa intervenção a uma pessoa já registada na BD.
 
 5. Apresente o(s) comando(s) que permitem a substituição de um elemento numa equipa existente na BD, cuja a intervenção não tenha sido concluída.
-Todas as simplicações e optimizações realizadas ao modelo devem ser indicadas e justicadas.
+Todas as simplicações e optimizações realizadas ao modelo devem ser indicadas e justificadas.
 
-**PS.1** Sugere-se que consulte o manual do SGDB para obter informac~ao sobre as funções de manipulação de datas.
+**PS.1** Sugere-se que consulte o manual do SGDB para obter informação sobre as funções de manipulação de datas.
 Data limite para entrega: 17 de Dezembro de 2021 até às 23:59.
 A entrega deve incluir um documento com as respostas de AR e o código PostgreSQL, enviados de forma electrónica através do Moodle. O documento é entregue em formato PDF.
 **Nota**: Deve ser possível aferir cada um dos objectivos de aprendizagem no material que entregar.
