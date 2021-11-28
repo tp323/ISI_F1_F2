@@ -18,8 +18,12 @@ create table IF NOT EXISTS EMPRESA(
 	morada varchar(150),
 	codpostal int,
 	localidade varchar(150),
+	constraint codpostalMin check (codpostal >= 1000000),
 	constraint codpostalMax check (codpostal <= 9999999),
-	constraint codpostalMin check (codpostal >= 1000000)
+	constraint nipcMin500 check (nipc >= 500000000),
+	constraint nipcMax500 check (nipc <= 599999999),
+	constraint nipcMin900 check (nipc >= 900000000),
+	constraint nipcMax900 check (nipc <= 999999999)
 );
 
 --EQUIPA(codigo, localizacao, responsavel)
@@ -48,7 +52,10 @@ create table IF NOT EXISTS PESSOA(
 	FOREIGN KEY (equipa)
      REFERENCES EQUIPA (codigo) ON DELETE CASCADE,
     FOREIGN KEY (empresa)
-     REFERENCES EMPRESA (id) ON DELETE CASCADE
+     REFERENCES EMPRESA (id) ON DELETE cascade,
+    constraint codpostalMin check (codpostal >= 1000000),
+	constraint codpostalMax check (codpostal <= 9999999)
+	--add constraint check age>=18
 );
 
 --TEL EMPRESA(empresa, telefone)
@@ -57,7 +64,9 @@ create table IF NOT EXISTS TEL_EMPRESA(
 	telefone varchar(10),
 	primary key (empresa, telefone),
 	FOREIGN KEY (empresa)
-     REFERENCES EMPRESA (id)
+     REFERENCES EMPRESA (id)--,
+    --constraint telefoneMin check (telefone >= 100000000),
+    --constraint telefoneMax check (telefone <= 999999999)
 );
 
 --ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa).
@@ -68,11 +77,11 @@ create table IF NOT EXISTS ACTIVO(
 	dtaquisicao date  not null,
 	modelo varchar(100),
 	marca varchar(75),
-	localizacao varchar(50)  not null,
-	idactivotopo varchar(5)  not null,
-	tipo int  not null,
-	empresa int  not null,
-	pessoa int  not null,
+	localizacao varchar(50) not null,
+	idactivotopo varchar(5) not null,
+	tipo int not null,
+	empresa int not null,
+	pessoa int not null,
 	FOREIGN KEY (idactivotopo)
      REFERENCES ACTIVO (id),
     FOREIGN KEY (tipo)
@@ -100,7 +109,9 @@ create table IF NOT EXISTS TEL_PESSOA(
 	telefone varchar(10),
 	primary key (pessoa, telefone),
 	FOREIGN KEY (pessoa)
-     REFERENCES PESSOA (id)
+     REFERENCES PESSOA (id)--,
+    --constraint telefoneMin check (telefone >= 100000000),
+    --constraint telefoneMax check (telefone <= 999999999)
 );
 
 
@@ -108,15 +119,18 @@ create table IF NOT EXISTS TEL_PESSOA(
 --no palavra reservada substituida por num
 create table IF NOT EXISTS INTERVENCAO(
 	num int primary key,
-	descrição varchar(75),
-	estado int,
+	descricao varchar(75),
+	estado varchar(11),
 	dtinicio date,
 	dtfim date,
 	valcusto decimal(6,2),
 	activo varchar(5),
 	atrdisc char(2),
 	FOREIGN KEY (activo)
-     REFERENCES ACTIVO (id)
+     REFERENCES ACTIVO (id),
+    constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
+    constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído'))
+    --add constraint check dtinicio<dtfim
 );
 
 --VCOMERCIAL(dtvcomercial, activo, valor)
@@ -127,6 +141,7 @@ create table IF NOT EXISTS VCOMERCIAL(
 	primary key (dtvcomercial, activo),
 	FOREIGN KEY (activo)
      REFERENCES ACTIVO (id)
+    --add constraint check dtvcomercial>ACTIVO.dtaquisicao
 );
 
 --INTER EQUIPA(intervencao, equipa)
@@ -146,7 +161,8 @@ create table IF NOT EXISTS INTER_PERIODICA(
 	periodicidade int,
 	primary key (intervencao, periodicidade),
 	FOREIGN KEY (intervencao)
-     REFERENCES INTERVENCAO (num)
+     REFERENCES INTERVENCAO (num),
+    constraint periodMeses check (periodicidade<=12)
 );
 
 
