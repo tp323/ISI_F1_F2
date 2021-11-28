@@ -25,10 +25,7 @@ No final da segunda fase do trabalho, os alunos devem ser capazes de:
 * Utilizar correctamente os predicados IN e EXISTS.
 
 
-
-Após a realização da 1ª fase do trabalho segue-se a implementação do modelo físico do
-sistema, i.e. deverá ser construído em PostgreSQL contemplando todas as restrições que
-consigam garantir na forma declarativa.
+Após a realização da 1ª fase do trabalho segue-se a implementação do modelo físico do sistema, i.e. deverá ser construído em PostgreSQL contemplando todas as restrições que consigam garantir na forma declarativa.
 **Nota**: Deverão preencher a base de dados com informação necessária que permita em seguida realizar interrogações que apresentem resultados pertinentes. Na etapa de preenchimento da base de dados, os alunos deverão ter particular atenção ao cumprimento das restrições de integridade, utilizando de forma adequada o controlo transaccional (a atomicidade).
 
 ### Resultados pretendidos
@@ -67,7 +64,7 @@ Tendo em conta os objectivos de aprendizagem, deverão ser produzidos os seguint
   
   (b) Apresente o nome de todos os activos por tipo, deve apresentar a lista dos nomes por ordem alfabética (em primeiro lugar) e a data de aquisição.
   
-  (c) Identifique todos os responsáveis de equipa que são (ou foram) gestores de pelo menos um activo. O resultado deve apresentar o nome, um n. de telefone (móvel ou fixo) e a profifissão.
+  (c) Identifique todos os responsáveis de equipa que são (ou foram) gestores de pelo menos um activo. O resultado deve apresentar o nome, um n. de telefone (móvel ou fixo) e a profissão.
   
   (d) Liste todas as intervenções programadas para daqui a um mês (faça uso das funções temporais). O resultado deve identificar o activo (id e nome) e a descrição de intervenção a realizar.
   
@@ -89,8 +86,7 @@ A entrega deve incluir um documento com as respostas de AR e o código PostgreSQ
 
 Todos os atributos são obrigatórios nas relações, excepto quando indicado o contrário. As relações são apresentadas por ordem alfabética. 
 
-**Nota**: Poderão não estar representadas todas as restrições de integridade, uma vez que esta componente também é avaliada. Mais, as
-restrições que não conseguiremos implementar no modelo físico serão asseguradas, posteriormente, na API que irão desenvolver na 3ª parte.
+**Nota**: Poderão não estar representadas todas as restrições de integridade, uma vez que esta componente também é avaliada. Mais, as restrições que não conseguiremos implementar no modelo físico serão asseguradas, posteriormente, na API que irão desenvolver na 3ª parte.
 
 
 
