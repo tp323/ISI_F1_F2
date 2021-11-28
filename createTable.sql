@@ -50,9 +50,9 @@ create table IF NOT EXISTS PESSOA(
 	equipa int,
 	empresa int,
 	FOREIGN KEY (equipa)
-     REFERENCES EQUIPA (codigo) ON DELETE CASCADE,
+     REFERENCES EQUIPA (codigo) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (empresa)
-     REFERENCES EMPRESA (id) ON DELETE cascade,
+     REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint codpostalMin check (codpostal >= 1000000),
 	constraint codpostalMax check (codpostal <= 9999999)
 	--add constraint check age>=18
@@ -64,7 +64,7 @@ create table IF NOT EXISTS TEL_EMPRESA(
 	telefone varchar(10),
 	primary key (empresa, telefone),
 	FOREIGN KEY (empresa)
-     REFERENCES EMPRESA (id)--,
+     REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE--,
     --constraint telefoneMin check (telefone >= 100000000),
     --constraint telefoneMax check (telefone <= 999999999)
 );
@@ -83,13 +83,13 @@ create table IF NOT EXISTS ACTIVO(
 	empresa int not null,
 	pessoa int not null,
 	FOREIGN KEY (idactivotopo)
-     REFERENCES ACTIVO (id),
+     REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (tipo)
-     REFERENCES ACTIVOTIPO (id),
+     REFERENCES ACTIVOTIPO (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (empresa)
-     REFERENCES EMPRESA (id),
+     REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (pessoa)
-     REFERENCES PESSOA (id)
+     REFERENCES PESSOA (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 --COMP PESSOA(pessoa, competencia)
@@ -98,9 +98,9 @@ create table IF NOT EXISTS COMP_PESSOA(
 	competencia int,
 	primary key (pessoa, competencia),
 	FOREIGN KEY (pessoa)
-     REFERENCES PESSOA (id),
+     REFERENCES PESSOA (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (competencia)
-     REFERENCES COMPETENCIA (codigo)
+     REFERENCES COMPETENCIA (codigo) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 --TEL PESSOA(pessoa, telefone)
@@ -109,7 +109,7 @@ create table IF NOT EXISTS TEL_PESSOA(
 	telefone varchar(10),
 	primary key (pessoa, telefone),
 	FOREIGN KEY (pessoa)
-     REFERENCES PESSOA (id)--,
+     REFERENCES PESSOA (id) ON DELETE CASCADE ON UPDATE CASCADE--,
     --constraint telefoneMin check (telefone >= 100000000),
     --constraint telefoneMax check (telefone <= 999999999)
 );
@@ -127,7 +127,7 @@ create table IF NOT EXISTS INTERVENCAO(
 	activo varchar(5),
 	atrdisc char(2),
 	FOREIGN KEY (activo)
-     REFERENCES ACTIVO (id),
+     REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
     constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído'))
     --add constraint check dtinicio<dtfim
@@ -140,7 +140,7 @@ create table IF NOT EXISTS VCOMERCIAL(
 	valor decimal(6,2),
 	primary key (dtvcomercial, activo),
 	FOREIGN KEY (activo)
-     REFERENCES ACTIVO (id)
+     REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE
     --add constraint check dtvcomercial>ACTIVO.dtaquisicao
 );
 
@@ -150,9 +150,9 @@ create table IF NOT EXISTS INTER_EQUIPA(
 	equipa int,
 	primary key (intervencao, equipa),
 	FOREIGN KEY (intervencao)
-     REFERENCES INTERVENCAO (num),
+     REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE,
   	FOREIGN KEY (equipa)
-     REFERENCES EQUIPA (codigo)
+     REFERENCES EQUIPA (codigo) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 --INTER PERIODICA(intervencao, periodicidade)
@@ -161,7 +161,7 @@ create table IF NOT EXISTS INTER_PERIODICA(
 	periodicidade int,
 	primary key (intervencao, periodicidade),
 	FOREIGN KEY (intervencao)
-     REFERENCES INTERVENCAO (num),
+     REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint periodMeses check (periodicidade<=12)
 );
 
