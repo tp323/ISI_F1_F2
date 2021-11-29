@@ -34,13 +34,13 @@ Tendo em conta os objectivos de aprendizagem, deverão ser produzidos os seguint
 1. Construção do modelo físico do sistema, contemplando todas as restrições de integridade passíveis de ser garantidas declarativamente, assim como a atomicidade nas operações.
   O código PostgreSQL que permite:
   
-  (a) Criar o modelo físico (1 script autónomo): \createTable.sql";
+  (a) Criar o modelo físico (1 script autónomo): "createTable.sql";
   
-  (b) Remover o modelo físico (1 script autónomo): \removeTable.sql";
+  (b) Remover o modelo físico (1 script autónomo): "removeTable.sql";
   
-  (c) Preenchimento inicial da base de dados (1 script autónomo): \insertTable.sql";
+  (c) Preenchimento inicial da base de dados (1 script autónomo): "insertTable.sql";
   
-  (d) Apagar todos os dados existentes nas tabelas (1 script autónomo): \deleteTable.sql".
+  (d) Apagar todos os dados existentes nas tabelas (1 script autónomo): "deleteTable.sql".
   
   Os dados introduzidos devem permitir validar todas as interrogações pedidas nesta fase do trabalho.
 
@@ -52,13 +52,13 @@ Tendo em conta os objectivos de aprendizagem, deverão ser produzidos os seguint
   
   (c) Apresente a lista de empresas (nome, nipc e url) juntamente com o número total de empregados registados.
   
-  (d) Liste as pessoas que estão a realizar a intervenção na \válvula de ar condicionado" ou que gere esse activo.
+  (d) Liste as pessoas que estão a realizar a intervenção na "válvula de ar condicionado" ou que gere esse activo.
   
-  (e) Pretende-se saber o nome de todos os activos que o \Manuel Fernandes" geriu ou fez intervenção.
+  (e) Pretende-se saber o nome de todos os activos que o "Manuel Fernandes" geriu ou fez intervenção.
   
   (f) Apresente o numero de elementos de uma equipa por intervenção.
 
-3. Conceba, na linguagem PostgreSQL, as interrogações que produzam os resultados a seguir indicados, utilizando apenas uma instrução PostgreSQL. Guarde num script autónomo de nome \queries.sql". Para cada instrução deve ser também apresentada a descrição do raciocínio seguido.
+3. Conceba, na linguagem PostgreSQL, as interrogações que produzam os resultados a seguir indicados, utilizando apenas uma instrução PostgreSQL. Guarde num script autónomo de nome "queries.sql". Para cada instrução deve ser também apresentada a descrição do raciocínio seguido.
 
   (a) Implemente em PostgreSQL as interrogações pedidas na alínea 2 (Pode escolher uma das soluções que apresentou acima, deste que nesta fase consiga fazer uso de todos os operadores).
   
