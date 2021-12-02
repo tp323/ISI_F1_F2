@@ -20,7 +20,9 @@ INTERVENCAO.descricao Similar???
 
 INTERVENCAO.estado tem de ser varchar(11)
 
+enunciado diz que date Tem o formato “dd-mm-aaaa” no entanto a documentação do post sql aponta para o formato “dd-mm-aaaa” TESTAR
 
+https://www.postgresql.org/docs/14/functions-datetime.html
 
 
 
