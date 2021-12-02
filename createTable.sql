@@ -1,13 +1,13 @@
 --ACTIVOTIPO(id, descricao).
 create table IF NOT EXISTS ACTIVOTIPO(
 	id int primary key,
-	descrição varchar(50)
+	descricao varchar(50)
 );
 
 --COMPETENCIA(id, descricao)
 create table IF NOT EXISTS COMPETENCIA(
 	codigo int primary key,
-	descrição varchar(50)
+	descricao varchar(50)
 );
 
 --EMPRESA(id, url, nipc, nome, morada, codpostal, localidade).
@@ -18,12 +18,9 @@ create table IF NOT EXISTS EMPRESA(
 	morada varchar(150),
 	codpostal int,
 	localidade varchar(150),
-	constraint codpostalMin check (codpostal >= 1000000),
-	constraint codpostalMax check (codpostal <= 9999999),
-	constraint nipcMin500 check (nipc >= 500000000),
-	constraint nipcMax500 check (nipc <= 599999999),
-	constraint nipcMin900 check (nipc >= 900000000),
-	constraint nipcMax900 check (nipc <= 999999999)
+	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999),
+	--constraint nipc500 check (nipc BETWEEN 500000000 and 599999999),
+	constraint nipc900 check (nipc BETWEEN 900000000 and 999999999)
 );
 
 --EQUIPA(codigo, localizacao, responsavel)
@@ -53,8 +50,7 @@ create table IF NOT EXISTS PESSOA(
      REFERENCES EQUIPA (codigo) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (empresa)
      REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    constraint codpostalMin check (codpostal >= 1000000),
-	constraint codpostalMax check (codpostal <= 9999999)
+	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999)--,
 	--add constraint check age>=18
 );
 
@@ -65,8 +61,7 @@ create table IF NOT EXISTS TEL_EMPRESA(
 	primary key (empresa, telefone),
 	FOREIGN KEY (empresa)
      REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE--,
-    --constraint telefoneMin check (telefone >= 100000000),
-    --constraint telefoneMax check (telefone <= 999999999)
+    --constraint telefone check (telefone BETWEEN 100000000 AND 999999999)
 );
 
 --ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa).
@@ -110,8 +105,7 @@ create table IF NOT EXISTS TEL_PESSOA(
 	primary key (pessoa, telefone),
 	FOREIGN KEY (pessoa)
      REFERENCES PESSOA (id) ON DELETE CASCADE ON UPDATE CASCADE--,
-    --constraint telefoneMin check (telefone >= 100000000),
-    --constraint telefoneMax check (telefone <= 999999999)
+    --constraint telefone check (telefone BETWEEN 100000000 AND 999999999)
 );
 
 
