@@ -15,12 +15,13 @@ create table IF NOT EXISTS EMPRESA(
 	id int primary key,
 	url varchar(50),
 	nipc int,
+	nome varchar(50),
 	morada varchar(150),
 	codpostal int,
 	localidade varchar(150),
 	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999),
-	--constraint nipc500 check (nipc BETWEEN 500000000 and 599999999),
-	constraint nipc900 check (nipc BETWEEN 900000000 and 999999999)
+	constraint nipc check (nipc BETWEEN 900000000 and 999999999 or nipc BETWEEN 500000000 and 599999999),
+	constraint url check (url like 'www.%.pt' or url like 'www.%.eu' or url like 'www.%.com')
 );
 
 --EQUIPA(codigo, localizacao, responsavel)
@@ -50,6 +51,7 @@ create table IF NOT EXISTS PESSOA(
      REFERENCES EQUIPA (codigo) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (empresa)
      REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    constraint email check (email like '%@%'),
 	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999)--,
 	--add constraint check age>=18
 );
@@ -123,7 +125,8 @@ create table IF NOT EXISTS INTERVENCAO(
 	FOREIGN KEY (activo)
      REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
-    constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído'))
+    constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído')),
+    constraint atrdic check (atrdisc IN ('NP', 'P'))
     --add constraint check dtinicio<dtfim
 );
 

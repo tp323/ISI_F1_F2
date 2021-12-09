@@ -24,5 +24,7 @@ enunciado diz que date Tem o formato “dd-mm-aaaa” no entanto a documentaçã
 
 https://www.postgresql.org/docs/14/functions-datetime.html
 
+nome está em falta em Empresa. é para a empresa ter nome ou apenas url?
+
 
 

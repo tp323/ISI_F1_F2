@@ -13,9 +13,10 @@ VALUES (1,'cá em baixo',1),
 (2,'Vila Nova da Rabona',3);
 
 INSERT INTO PESSOA(id, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa)
-VALUES (1,'www.ok.pt','o chato de AED','1995-02-03',33333333,'ali ao lado',1200300,'Aqui','chato',1,1),
-(2,'www.aquiestou','Luis Miguel','1990-04-05',222222222,'lá em baixo',1100100,'Ali','presidente da camara',1,1),
-(3,'www.rabona24.pt','Ezequiel Valadas','2000-01-01',111111111,'Rua João Magalhães Nº1',2200200,'Vila Nova da Rabona','presidente da camara',2,1);
+VALUES (1,'ok@pt','o chato de AED','1995-02-03',33333333,'ali ao lado',1200300,'Aqui','chato',1,1),
+(2,'aquiestou@aqui.pt','Luis Miguel','1990-04-05',222222222,'lá em baixo',1100100,'Ali','presidente da camara',1,1),
+(3,'valadas@rabona.pt','Ezequiel Valadas','2000-01-01',111111111,'Rua João Magalhães Nº1',2200200,'Vila Nova da Rabona','presidente da camara',2,1),
+(4,'apontamentosSrAmerico@sapo.pt','Sr Américo','1995-05-05',222222222,'Rua dos Maias Nº25',2100222,'Lisboa','Educador de calões',2,1);
 
 INSERT INTO  TEL_EMPRESA(empresa, telefone)
 VALUES (1,210000000),(2,210000001);
@@ -24,19 +25,29 @@ INSERT INTO  ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, i
 VALUES (1,'cena','1','2021-02-02',NULL,NULL,'ali',1,1,1,2);
 
 INSERT INTO COMP_PESSOA(pessoa, competencia)
-VALUES;
+VALUES (1,1),(2,1);
 
 INSERT INTO TEL_PESSOA(pessoa, telefone)
-VALUES;
+VALUES (1, 911111111);
 
 INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
-VALUES;
+VALUES (1,'rutura','em análise','2021-03-03','2021-03-04',30,1,'P');
 
 INSERT INTO VCOMERCIAL(dtvcomercial, activo, valor)
-VALUES;
+VALUES ('2021-04-04',1,23);
 
-INSERT INTO INTER EQUIPA(intervencao, equipa)
-VALUES;
+INSERT INTO INTER_EQUIPA(intervencao, equipa)
+VALUES (1,1);
 
-INSERT INTO INTER PERIODICA(intervencao, periodicidade)
-VALUES;
+INSERT INTO INTER_PERIODICA(intervencao, periodicidade)
+VALUES (1,2);
+
+--VALUES THAT SHOULD CAUSE ERRORS DO TO SURPASSING DOMAINS
+--ACTIVO bit diferente de 0 ou 1
+--INSERT INTO  ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa) 
+--VALUES (2,'cena','1a','2021-02-02',NULL,NULL,'ali',1,1,1,2);
+
+
+
+
+
