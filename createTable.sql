@@ -1,3 +1,7 @@
+
+--BEGIN TRY  
+	BEGIN transaction;
+	
 --ACTIVOTIPO(id, descricao).
 create table IF NOT EXISTS ACTIVOTIPO(
 	id int primary key,
@@ -56,14 +60,17 @@ create table IF NOT EXISTS PESSOA(
 	--add constraint check age>=18
 );
 
+ALTER TABLE EQUIPA
+ADD CONSTRAINT resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
+
 --TEL EMPRESA(empresa, telefone)
 create table IF NOT EXISTS TEL_EMPRESA(
 	empresa int,
 	telefone varchar(10),
 	primary key (empresa, telefone),
 	FOREIGN KEY (empresa)
-     REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE--,
-    --constraint telefone check (telefone BETWEEN 100000000 AND 999999999)
+     REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE cascade,
+    constraint contacto check (telefone similar to '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
 );
 
 --ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa).
@@ -161,6 +168,12 @@ create table IF NOT EXISTS INTER_PERIODICA(
      REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint periodMeses check (periodicidade<=12)
 );
+COMMIT transaction
+--end TRY
+--begin CATCH
+--	rollback transaction
+--END CATCH
+
 
 
 
