@@ -100,9 +100,9 @@ ACTIVO(*id*, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo
 | nome         | varchar(50)   |                                                              |
 | estado       | bit           | “0” corresponde a desactivado e “1” a operacional.           |
 | dtaquisicao  | date          | Tem o formato “dd-mm-aaaa”.                                  |
-| modelo       | nvarchar(100) |                                                              |
-| marca        | nvarchar(75)  |                                                              |
-| localizacao  | nvarchar(50)  |                                                              |
+| modelo       | varchar(100)  |                                                              |
+| marca        | varchar(75)   |                                                              |
+| localizacao  | varchar(50)   |                                                              |
 | idactivotopo | varchar(5)    | FK referência de ACTIVO.{id}.                                |
 | tipo         | int           | FK referência de ACTIVOTIPO.{id}. O tipo de activo de topo da hierarquia deve ser igual aos “filhos”. |
 | empresa      | int           | FK referência de EMPRESA.{id}.                               |
@@ -117,7 +117,7 @@ ACTIVOTIPO(*id*, descricao).
 | Atributo  | Tipo         | Restrições Integridade |
 | --------- | ------------ | ---------------------- |
 | id        | int          |                        |
-| descrição | nvarchar(50) |                        |
+| descrição | varchar(50)  |                        |
 
 **COMPETENCIA**
 
@@ -126,7 +126,7 @@ COMPETENCIA(*id*, descricao).
 | Atributo  | Tipo         | Restrições Integridade |
 | --------- | ------------ | ---------------------- |
 | codigo    | int          |                        |
-| descricao | nvarchar(50) |                        |
+| descricao | varchar(50)  |                        |
 
 **COMP PESSOA**
 
@@ -144,11 +144,12 @@ EMPRESA(*id*, url, nipc, nome, morada, codpostal, localidade).
 | Atributo   | Tipo          | Restrições Integridade                                       |
 | ---------- | ------------- | ------------------------------------------------------------ |
 | id         | int           | Foi adicionado este atributo como identificador de EMPRESA por questões de simplificação. |
-| url        | nvarchar(50)  | O valor contém “www.{C}.pt” ou “www.{C}.eu” ou “www.{C}.com”, onde C representa um conjunto de caracteres. |
+| url        | varchar(50)   | O valor contém “www.{C}.pt” ou “www.{C}.eu” ou “www.{C}.com”, onde C representa um conjunto de caracteres. |
 | nipc       | int           | Corresponde ao Número de Identificação de Pessoa Colectiva.  |
-| morada     | nvarchar(150) |                                                              |
+| nome       | varchar(100)  |                                                              |
+| morada     | varchar(150)  |                                                              |
 | codpostal  | int           | Valor que contém 7 dígitos, que compõem o código<br/>postal sem hífen |
-| localidade | nvarchar(150) |                                                              |
+| localidade | varchar(150)  |                                                              |
 
 **EQUIPA**
 
@@ -157,7 +158,7 @@ EQUIPA(*codigo*, localizacao, responsavel).
 | Atributo    | Tipo         | Restrições Integridade        |
 | ----------- | ------------ | ----------------------------- |
 | codigo      | int          |                               |
-| localizacao | nvarchar(50) |                               |
+| localizacao | varchar(50)  |                               |
 | responsavel | int          | FK referência de PESSOA.{id}. |
 
 **INTERVENCAO**
@@ -167,8 +168,8 @@ INTERVENCAO(*no*, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
 | Atributo  | Tipo         | Restrições Integridade                                       |
 | --------- | ------------ | ------------------------------------------------------------ |
 | no        | int          | Valor sequencial.                                            |
-| descricao | nvarchar(75) | Pode tomar como valores “rutura”, “inspecção” ou similar.    |
-| estado    | int          | Toma os valores “em análise”, “em execução” ou “concluído”.  |
+| descricao | varchar(75)  | Pode tomar como valores “rutura”, “inspecção” ou similar.    |
+| estado    | varchar(50)  | Toma os valores “em análise”, “em execução” ou “concluído”.  |
 | dtinicio  | date         | Tem o formato “dd-mm-aaaa”. Valor deve ser superior à data de aquisição do activo (dtaquisicao). O atributo estado não pode ter como valor “concluído”. |
 | dtfim     | date         | Tem o formato “dd-mm-aaaa”. Valor superior a dtinicio. O atributo estado deve passar a “concluído”. |
 | valcusto  | decimal(6,2) | Valor em euros.                                              |
@@ -182,7 +183,7 @@ INTER EQUIPA(*intervencao, equipa*).
 | Atributo    | Tipo | Restrições Integridade             |
 | ----------- | ---- | ---------------------------------- |
 | intervencao | int  | FK referência de INTERVENCAO.{no}. |
-| equipa      | int  | FK referência de EQUIPA.{id}.      |
+| equipa      | int  | FK referência de EQUIPA.{codigo}.  |
 
 **INTER PERIODICA**
 
@@ -200,13 +201,13 @@ PESSOA(*id*, email, nome, dtnascimento, noident, morada, codpostal, localidade, 
 | Atributo     | Tipo          | Restrições Integridade                                       |
 | ------------ | ------------- | ------------------------------------------------------------ |
 | id           | int           | Foi adicionado este atributo como identificador de PESSOA por questões de simplificação. |
-| email        | nvarchar(60)  | O valor é do tipo“{C}@{C}”, onde C representa caracter.      |
-| nome         | nvarchar(150) |                                                              |
+| email        | varchar(60)   | O valor é do tipo“{C}@{C}”, onde C representa caracter.      |
+| nome         | varchar(150)  |                                                              |
 | dtnascimento | date          | A pessoa deve ter no mínimo 18 anos de idade à data actual.  |
 | noident      | char(10)      | número de identificação (cartão de cidadão ou NIF). Por questões de simplificação, optou-se por considerar apenas um dos números para identificação. |
-| morada       | nvarchar(150) |                                                              |
+| morada       | varchar(150)  |                                                              |
 | codpostal    | int           | Valor que contém 7 dígitos, que compõem o código postal sem hífen |
-| localidade   | nvarchar(150) |                                                              |
+| localidade   | varchar(150)  |                                                              |
 | profissao    | varchar(100)  |                                                              |
 | equipa       | int           | FK referência de EQUIPA.{codigo}                             |
 | empresa      | int           | FK referência de EMPRESA.{id}.                               |
