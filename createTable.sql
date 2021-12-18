@@ -1,7 +1,7 @@
 
 --BEGIN TRY  
-	BEGIN transaction;
-	
+BEGIN transaction;
+
 --ACTIVOTIPO(id, descricao).
 create table IF NOT EXISTS ACTIVOTIPO(
 	id int primary key,
@@ -19,7 +19,7 @@ create table IF NOT EXISTS EMPRESA(
 	id int primary key,
 	url varchar(50),
 	nipc int,
-	nome varchar(50),
+	nome varchar(100),
 	morada varchar(150),
 	codpostal int,
 	localidade varchar(150),
@@ -60,8 +60,8 @@ create table IF NOT EXISTS PESSOA(
 	--add constraint check age>=18
 );
 
-ALTER TABLE EQUIPA
-ADD CONSTRAINT resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
+ALTER table if EXISTS EQUIPA
+ADD constraint resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
 
 --TEL EMPRESA(empresa, telefone)
 create table IF NOT EXISTS TEL_EMPRESA(
@@ -123,7 +123,7 @@ create table IF NOT EXISTS TEL_PESSOA(
 create table IF NOT EXISTS INTERVENCAO(
 	num int primary key,
 	descricao varchar(75),
-	estado varchar(11),
+	estado varchar(50),
 	dtinicio date,
 	dtfim date,
 	valcusto decimal(6,2),
@@ -134,7 +134,7 @@ create table IF NOT EXISTS INTERVENCAO(
     constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
     constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído')),
     constraint atrdic check (atrdisc IN ('NP', 'P'))
-    --add constraint check dtinicio<dtfim
+    --constraint check dtinicio<dtfim
 );
 
 --VCOMERCIAL(dtvcomercial, activo, valor)
@@ -145,7 +145,7 @@ create table IF NOT EXISTS VCOMERCIAL(
 	primary key (dtvcomercial, activo),
 	FOREIGN KEY (activo)
      REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE
-    --add constraint check dtvcomercial>ACTIVO.dtaquisicao
+    --constraint check dtvcomercial>ACTIVO.dtaquisicao
 );
 
 --INTER EQUIPA(intervencao, equipa)
@@ -165,18 +165,12 @@ create table IF NOT EXISTS INTER_PERIODICA(
 	periodicidade int,
 	primary key (intervencao, periodicidade),
 	FOREIGN KEY (intervencao)
-     REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE,
-    constraint periodMeses check (periodicidade<=12)
+     REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE
 );
-COMMIT transaction
+
+COMMIT transaction;
 --end TRY
 --begin CATCH
 --	rollback transaction
 --END CATCH
-
-
-
-
-
-
 
