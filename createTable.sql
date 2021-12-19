@@ -29,13 +29,10 @@ create table IF NOT EXISTS EMPRESA(
 );
 
 --EQUIPA(codigo, localizacao, responsavel)
--- cant chose order between EQUIPA and PESSOA conflict FKs being called between the 2
 create table IF NOT EXISTS EQUIPA(
 	codigo int primary key,
 	localizacao varchar(50),
-	responsavel int--,
-	--FOREIGN KEY (responsavel)
-    -- REFERENCES PESSOA (id) ON DELETE CASCADE
+	responsavel int
 );
 
 --PESSOA(id, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa).
@@ -56,8 +53,10 @@ create table IF NOT EXISTS PESSOA(
     FOREIGN KEY (empresa)
      REFERENCES EMPRESA (id) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint email check (email like '%@%'),
-	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999)--,
-	--add constraint check age>=18
+	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999),
+	--constraint ageAbove18 check (DATE_PART('year', AGE(dtnascimento)) >= 18)
+	constraint ageAbove18 check ((dtnascimento + '18 years'::interval)::date <= current_date)
+	--constraint ageAbove18 check ( age(dtnascimento) >= interval '18' year)
 );
 
 ALTER table if EXISTS EQUIPA
@@ -133,8 +132,8 @@ create table IF NOT EXISTS INTERVENCAO(
      REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE,
     constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
     constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído')),
-    constraint atrdic check (atrdisc IN ('NP', 'P'))
-    --constraint check dtinicio<dtfim
+    constraint atrdic check (atrdisc IN ('NP', 'P')),
+    constraint dtinibeforefim check (dtinicio<dtfim)
 );
 
 --VCOMERCIAL(dtvcomercial, activo, valor)
@@ -145,7 +144,6 @@ create table IF NOT EXISTS VCOMERCIAL(
 	primary key (dtvcomercial, activo),
 	FOREIGN KEY (activo)
      REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE
-    --constraint check dtvcomercial>ACTIVO.dtaquisicao
 );
 
 --INTER EQUIPA(intervencao, equipa)

@@ -1,5 +1,4 @@
-
---begin transaction ;
+begin transaction ;
 
 INSERT INTO ACTIVOTIPO (id, descricao)
 VALUES (1,'cenas1'),(2,'cenas2'),(3,'cenas3'),(4,'cenas4');
@@ -52,7 +51,16 @@ VALUES (1,2);
 --INSERT INTO  ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa) 
 --VALUES (2,'cena','1a','2021-02-02',NULL,NULL,'ali',1,1,1,2);
 
---commit;
+--INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc) VALUES (8,'rutura','em análise','2021-03-03','2021-03-03',31,1,'P');
+--INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc) VALUES (10,'rutura','em análise','2021-03-03','2021-03-02',31,1,'P');
+
+
+--INSERT INTO PESSOA(id, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa) VALUES (10,'ok1@pt','menos de 18','2010-02-03',32333333,'ali ao lado',1290300,'Aqui','chato',1,1);
+
+--INSERT INTO PESSOA(id, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa) VALUES (12,'ok2@pt','igual 18','2003-12-19',32333313,'ali ao lado',2290300,'Aqui','chato',1,1);
+
+
+commit;
 
 
 
