@@ -59,6 +59,8 @@ create table IF NOT EXISTS PESSOA(
 	--constraint ageAbove18 check ( age(dtnascimento) >= interval '18' year)
 );
 
+ALTER table if EXISTS EQUIPA DROP constraint if EXISTS resp_pessoa;
+
 ALTER table if EXISTS EQUIPA
 ADD constraint resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
 
