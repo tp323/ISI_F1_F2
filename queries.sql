@@ -21,12 +21,6 @@ and ACTIVO.nome = 'válvula de ar condicionado')
 --gere
 select distinct ACTIVO.nome, PESSOA.equipa, PESSOA.nome from (PESSOA full outer join ACTIVO on PESSOA.id=ACTIVO.pessoa) where ACTIVO.nome = 'válvula de ar condicionado'; 
 
-
-select distinct ACTIVO.nome, PESSOA.equipa, PESSOA.nome, ACTIVO.pessoa from 
-(PESSOA full outer join INTER_EQUIPA on PESSOA.equipa=INTER_EQUIPA.equipa full outer join INTERVENCAO on INTER_EQUIPA.intervencao=INTERVENCAO.num full outer join ACTIVO 
-on INTERVENCAO.activo=ACTIVO.id)-- join ACTIVO on PESSOA.id = ACTIVO.pessoa)
-where ACTIVO.nome = 'válvula de ar condicionado';
-
 --select ACTIVO.nome from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id) ;
 
 select distinct ACTIVO.nome, PESSOA.equipa, PESSOA.nome from 
@@ -66,12 +60,19 @@ select DISTINCT PESSOA.nome, profissao, telefone from (PESSOA left outer join TE
 --3.e)
 
 --3.f)
+--O LEFT OUTER JOIN PODERIA SER SUBSTITUIDOS POR INNER JOIN SE CONSIDERÁSSEMOS QUE NÃO É POSSIVEL EXISTIR ACTIVOS SEM VALOR COMERCIAL
+create view intervencoes as select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
+from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id left outer join VCOMERCIAL on id = VCOMERCIAL.activo) group by id, nome,valor,dtvcomercial order by id,dtvcomercial desc;
 
 --4
+--CASO O ACTIVO NÃO EXISTISSE NA BD PODERIA SER INSERIDO COM OS SEGUINTES COMANDOS, QUE NÃO É O CASO
+--INSERT INTO ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa) values (5,'válvula de ar condicionado','0','2010-06-15','LG','xpto12.3','gabinete da direcção do Complexo de Piscinas',1,5,1,5);
+--INSERT INTO ACTIVOTIPO (id, descricao) VALUES (5,'valvulas');
 --OBTER ID DE ACTIVO
 --select distinct id from ACTIVO where nome = 'válvula de ar condicionado'; 
 
 --INSERT INTERVENCAO PARA SUBSTITIR VALVULA 
+--NAO PODEMOS DESCREVER A INTERVENÇÃO COMO SUBSTITUIÇÃO, POIS TANTO OS ATRIBUTOS DESCRICAO COMO ESTADO SÓ ACEITAM DETERMINADAS STRINGS, NÃO SENDO SUBSTITUIÇÃO UMA DAS STRINGS ACEITES
 INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
 VALUES (10,'rutura','em execução','2021-12-20',NULL,150,5,'NP');
 
@@ -79,4 +80,6 @@ VALUES (10,'rutura','em execução','2021-12-20',NULL,150,5,'NP');
 INSERT INTO INTER_EQUIPA(intervencao, equipa) VALUES (10,1);
 
 --5
-
+--POR INTERVENÇÃO NÃO CONCLUIDA CONSIDERAMOS O SEU ESTADO = 'em execução' APENAS POIS CONSIDERAMOS QUE EM 'em análise' SIGNIFICA QUE A INTERVENÇÃO AINDA NÃO SE INICIOU
+update PESSOA set email = 'mail@generico.pt',nome = 'nome generico',dtnascimento = '1990-01-01',noident = 222221111, morada = 'Rua generica Nº1',codpostal = 2100222,localidade = 'Lisboa',profissao='Exemplo'
+ where id = 4;
