@@ -132,7 +132,7 @@ create table IF NOT EXISTS INTERVENCAO(
 	atrdisc char(2),
 	FOREIGN KEY (activo)
      REFERENCES ACTIVO (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
+    --constraint decricaoVals check (descricao IN ('rutura', 'inspecção')),
     constraint estadoVals check (estado IN ('em análise', 'em execução', 'concluído')),
     constraint atrdic check (atrdisc IN ('NP', 'P')),
     constraint dtinibeforefim check (dtinicio<dtfim)

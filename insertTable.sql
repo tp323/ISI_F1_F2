@@ -47,7 +47,7 @@ VALUES (1,'rutura','em análise','2021-03-03','2021-03-04',30,1,'P'),
 (2,'rutura','em análise','2021-07-09','2021-09-12',35,2,'P'),
 (3,'inspecção','em execução','2021-10-13',null,27,5,'NP'),
 (4,'rutura','em análise','2020-11-24',null,27,5,'NP'),
-(5,'rutura','em execução','2020-09-17','2020-12-20',27,5,'NP');
+(5,'rutura','em execução','2020-09-17',null,27,5,'NP');
 
 INSERT INTO VCOMERCIAL(dtvcomercial, activo, valor)
 VALUES ('2021-02-03',1,23),

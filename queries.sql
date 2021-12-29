@@ -56,9 +56,10 @@ select nome from ACTIVO order by nome asc;
 select DISTINCT PESSOA.nome, profissao, telefone from (PESSOA left outer join TEL_PESSOA on PESSOA.id=TEL_PESSOA.pessoa inner join ACTIVO on PESSOA.id=ACTIVO.pessoa);
 
 --3.d)
+select num from (INTERVENCAO) 
 
 --3.e)
-
+create view intervencoes_programadas as select IE.equipa, num, nome, profissao, atrdisc as periodicidade from (INTER_EQUIPA as IE join INTERVENCAO on IE.intervencao=INTERVENCAO.num join PESSOA on IE.equipa=PESSOA.equipa) where date_part('year', INTERVENCAO.dtinicio) = date_part('year', CURRENT_DATE) -1;
 --3.f)
 --O LEFT OUTER JOIN PODERIA SER SUBSTITUIDOS POR INNER JOIN SE CONSIDERÁSSEMOS QUE NÃO É POSSIVEL EXISTIR ACTIVOS SEM VALOR COMERCIAL
 create view intervencoes as select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
@@ -72,14 +73,16 @@ from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id left
 --select distinct id from ACTIVO where nome = 'válvula de ar condicionado'; 
 
 --INSERT INTERVENCAO PARA SUBSTITIR VALVULA 
---NAO PODEMOS DESCREVER A INTERVENÇÃO COMO SUBSTITUIÇÃO, POIS TANTO OS ATRIBUTOS DESCRICAO COMO ESTADO SÓ ACEITAM DETERMINADAS STRINGS, NÃO SENDO SUBSTITUIÇÃO UMA DAS STRINGS ACEITES
 INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
-VALUES (10,'rutura','em execução','2021-12-20',NULL,150,5,'NP');
+VALUES (10,'substituição válvula','em execução','2021-12-20',NULL,150,5,'NP');
 
 --ATRIBUIR EQUIPA A SUBSTITUIÇÃO DE VALVULA
 INSERT INTO INTER_EQUIPA(intervencao, equipa) VALUES (10,1);
 
 --5
+--OBTER IDS PESSOAS EM EQUIPAS COM INTERVENÇÕES EM EXECUÇÃO
 --POR INTERVENÇÃO NÃO CONCLUIDA CONSIDERAMOS O SEU ESTADO = 'em execução' APENAS POIS CONSIDERAMOS QUE EM 'em análise' SIGNIFICA QUE A INTERVENÇÃO AINDA NÃO SE INICIOU
+--select PESSOA.id from (PESSOA inner join INTER_EQUIPA on PESSOA.equipa=INTER_EQUIPA.equipa inner join INTERVENCAO on INTER_EQUIPA.intervencao=INTERVENCAO.num) where estado = 'em execução';
+
 update PESSOA set email = 'mail@generico.pt',nome = 'nome generico',dtnascimento = '1990-01-01',noident = 222221111, morada = 'Rua generica Nº1',codpostal = 2100222,localidade = 'Lisboa',profissao='Exemplo'
  where id = 4;
