@@ -1,5 +1,3 @@
-
---BEGIN TRY  
 BEGIN transaction;
 
 --ACTIVOTIPO(id, descricao).
@@ -56,7 +54,6 @@ create table IF NOT EXISTS PESSOA(
 	constraint codpostal check (codpostal BETWEEN 1000000 and 9999999),
 	--constraint ageAbove18 check (DATE_PART('year', AGE(dtnascimento)) >= 18)
 	constraint ageAbove18 check ((dtnascimento + '18 years'::interval)::date <= current_date)
-	--constraint ageAbove18 check ( age(dtnascimento) >= interval '18' year)
 );
 
 ALTER table if EXISTS EQUIPA DROP constraint if EXISTS resp_pessoa;
@@ -116,14 +113,12 @@ create table IF NOT EXISTS TEL_PESSOA(
 	primary key (pessoa, telefone),
 	FOREIGN KEY (pessoa)
      REFERENCES PESSOA (id) ON DELETE CASCADE ON UPDATE CASCADE--,
-    --constraint telefone check (telefone BETWEEN 100000000 AND 999999999)
 );
 
 
 --INTERVENCAO(no, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
---no palavra reservada substituida por num
 create table IF NOT EXISTS INTERVENCAO(
-	num int primary key,
+	noint int primary key,
 	descricao varchar(75),
 	estado varchar(50),
 	dtinicio date,
@@ -154,7 +149,7 @@ create table IF NOT EXISTS INTER_EQUIPA(
 	equipa int,
 	primary key (intervencao, equipa),
 	FOREIGN KEY (intervencao)
-     REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE,
+     REFERENCES INTERVENCAO (noint) ON DELETE CASCADE ON UPDATE CASCADE,
   	FOREIGN KEY (equipa)
      REFERENCES EQUIPA (codigo) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -165,12 +160,9 @@ create table IF NOT EXISTS INTER_PERIODICA(
 	periodicidade int,
 	primary key (intervencao, periodicidade),
 	FOREIGN KEY (intervencao)
-     REFERENCES INTERVENCAO (num) ON DELETE CASCADE ON UPDATE CASCADE
+     REFERENCES INTERVENCAO (noint) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 COMMIT transaction;
---end TRY
---begin CATCH
---	rollback transaction
---END CATCH
+
 
