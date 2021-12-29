@@ -1,7 +1,7 @@
 begin transaction ;
 
 INSERT INTO ACTIVOTIPO (id, descricao)
-VALUES (1,'cenas1'),(2,'cenas2'),(3,'cenas3'),(4,'cenas4'),(5,'valvulas e cenas');
+VALUES (1,'cenas1'),(2,'cenas2'),(3,'cenas3'),(4,'cenas4'),(5,'valvulas');
 
 INSERT INTO COMPETENCIA (codigo, descricao)
 VALUES (1,'apicultor'),(2,'bom comunicador');
@@ -27,8 +27,7 @@ ALTER table if EXISTS EQUIPA
 ADD constraint resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
 
 INSERT INTO  TEL_EMPRESA(empresa, telefone)
-values(1,'999991999'),(2,'910000001')
-;
+values(1,'999991999'),(2,'910000001');
 
 INSERT INTO ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa)
 VALUES (1,'cena1','1','2021-02-02',NULL,NULL,'ali',1,1,1,2),
@@ -51,7 +50,15 @@ VALUES (1,'rutura','em análise','2021-03-03','2021-03-04',30,1,'P'),
 (5,'rutura','em execução','2020-09-17','2020-12-20',27,5,'NP');
 
 INSERT INTO VCOMERCIAL(dtvcomercial, activo, valor)
-VALUES ('2021-04-04',1,23);
+VALUES ('2021-02-03',1,23),
+('2021-04-04',1,25),
+('2021-12-20',1,22),
+('2021-10-21',1,13),
+('2021-09-01',2,52),
+('2020-01-22',3,120),
+('2018-04-09',4,35),
+('2010-06-15',5,15),
+('2021-01-26',3,125);
 
 INSERT INTO INTER_EQUIPA(intervencao, equipa)
 VALUES (1,1),(2,3),(3,2),(4,2),(5,1);
@@ -74,6 +81,5 @@ VALUES (1,2),(2,6);
 
 
 commit transaction;
-
 
 
