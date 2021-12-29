@@ -35,7 +35,7 @@ VALUES (1,'cena1','1','2021-02-02',NULL,NULL,'ali',1,1,1,2),
 (2,'cena2','1','2021-09-01',NULL,NULL,'aqui',1,2,1,2),
 (3,'cena3','0','2020-01-21',NULL,NULL,'acolá',2,3,2,5),
 (4,'cena4','1','2018-04-08',NULL,NULL,'ali ao longe',1,4,2,5),
-(5,'válvula de ar condicionado','0','2010-06-15','LG','xpto12.3','em casa',1,5,1,5);
+(5,'válvula de ar condicionado','0','2010-06-15','LG','xpto12.3','gabinete da direcção do Complexo de Piscinas',1,5,1,5);
 
 INSERT INTO COMP_PESSOA(pessoa, competencia)
 VALUES (1,1),(1,2),(2,1),(3,2);
