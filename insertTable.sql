@@ -17,11 +17,12 @@ VALUES (1,'cá em baixo',1),
 (3,'aqui',4);
 
 INSERT INTO PESSOA(id, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa)
-VALUES (1,'ok@pt','o chato de AED','1995-02-03',33333333,'ali ao lado',1200300,'Aqui','chato',1,1),
+VALUES (1,'ok@pt','individuo','1995-02-03',33333333,'ali ao lado',1200300,'Aqui','cenas',1,1),
 (2,'aquiestou@aqui.pt','Luis Miguel','1990-04-05',222222222,'lá em baixo',1100100,'Ali','presidente da camara',1,1),
 (3,'valadas@rabona.pt','Ezequiel Valadas','2000-01-01',111111111,'Rua João Magalhães Nº1',2200200,'Vila Nova da Rabona','presidente da camara',2,2),
 (4,'apontamentosSrAmerico@sapo.pt','Sr Américo','1995-05-05',222222222,'Rua dos Maias Nº25',2100222,'Lisboa','Educador de calões',2,2),
-(5,'manuel@sapo.pt','Manuel Fernandes','1993-02-08',222222222,'Rua alguidar Nº2',2100222,'Lisboa','Exemplo de AR',3,1)
+(5,'manuel@sapo.pt','Manuel Fernandes','1993-02-08',222222222,'Rua alguidar Nº2',2100222,'Lisboa','Exemplo de AR',3,1),
+(6,'ser@sapo.pt','ser vivo','1977-12-21',222222202,'Rua ali Nº1',2101222,'Canelas','Companheiro de exemplo',3,1)
 ;
 ALTER table if EXISTS EQUIPA
 ADD constraint resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
@@ -30,9 +31,9 @@ INSERT INTO  TEL_EMPRESA(empresa, telefone)
 values(1,'999991999'),(2,'910000001');
 
 INSERT INTO ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa)
-VALUES ('a0001','cena1','1','2021-02-02',NULL,NULL,'ali','a0001',1,1,2),
+VALUES ('a0001','cena1','1','2021-02-02',NULL,NULL,'ali','a0001',3,1,2),
 ('z0002','cena2','1','2021-09-01',NULL,NULL,'aqui','a0001',2,1,2),
-('b0003','cena3','0','2020-01-21',NULL,NULL,'acolá','a0001',3,2,5),
+('b0003','cena3','0','2020-01-21',NULL,NULL,'acolá','a0001',1,2,5),
 ('A0004','cena4','1','2018-04-08',NULL,NULL,'ali ao longe','a0001',4,2,5),
 ('Z0005','válvula de ar condicionado','0','2010-06-15','LG','xpto12.3','gabinete da direcção do Complexo de Piscinas','a0001',5,1,5);
 
@@ -42,9 +43,9 @@ VALUES (1,1),(1,2),(2,1),(3,2);
 INSERT INTO TEL_PESSOA(pessoa, telefone)
 VALUES (1, '911111111');
 
-INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
-VALUES (1,'rutura','em análise','2021-03-03','2021-03-04',30,'a0001','P'),
-(2,'rutura','em análise','2021-07-09','2021-09-12',35,'z0002','P'),
+INSERT INTO INTERVENCAO(noint, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc)
+VALUES (1,'rutura','em análise','2021-03-03',null,30,'a0001','P'),
+(2,'rutura','concluído','2021-07-09','2021-09-12',35,'z0002','P'),
 (3,'inspecção','em execução','2021-10-13',null,27,'Z0005','NP'),
 (4,'rutura','em análise','2020-11-24',null,27,'Z0005','NP'),
 (5,'rutura','em execução','2020-09-17',null,27,'Z0005','NP'),
@@ -73,8 +74,8 @@ VALUES (1,2),(2,6);
 --INSERT INTO  ACTIVO(id, nome, estado, dtaquisicao, marca, modelo, localizacao, idactivotopo, tipo, empresa, pessoa) 
 --VALUES (2,'cena','1a','2021-02-02',NULL,NULL,'ali',1,1,1,2);
 
---INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc) VALUES (8,'rutura','em análise','2021-03-03','2021-03-03',31,1,'P');
---INSERT INTO INTERVENCAO(num, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc) VALUES (10,'rutura','em análise','2021-03-03','2021-03-02',31,1,'P');
+--INSERT INTO INTERVENCAO(noint, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc) VALUES (8,'rutura','em análise','2021-03-03','2021-03-03',31,1,'P');
+--INSERT INTO INTERVENCAO(noint, descricao, estado, dtinicio, dtfim, valcusto, activo, atrdisc) VALUES (10,'rutura','em análise','2021-03-03','2021-03-02',31,1,'P');
 
 
 --INSERT INTO PESSOA(id, email, nome, dtnascimento, noident, morada, codpostal, localidade, profissao, equipa, empresa) VALUES (10,'ok1@pt','menos de 18','2010-02-03',32333333,'ali ao lado',1290300,'Aqui','chato',1,1);
