@@ -54,7 +54,7 @@ group by id, nome,valor,dtvcomercial order by id,dtvcomercial desc;
 --A QUERRY SEGUINTE CRIA UMA VISTA CONSIDERANDO QUE NÃO PODEM EXISTIR ACTIVOS SEM VALOR COMERCIAL O QUE COMO JÁ FOI MENCIONADO SERIA ALCANÇADO TAMBÉM ALTERANDO APENAS OS JOINS
 create view intervencoes_sem_activos_semvalorcomercial as select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
 from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id inner join VCOMERCIAL on id = VCOMERCIAL.activo) 
-group by id, nome,valor,dtvcomercial,valcusto having valcusto >1 order by id,dtvcomercial desc;
+group by id, nome,valor,dtvcomercial,valcusto having valcusto >0 order by id,dtvcomercial desc;
 
 --4
 --CASO O ACTIVO NÃO EXISTISSE NA BD PODERIA SER INSERIDO COM OS SEGUINTES COMANDOS, QUE NÃO É O CASO
