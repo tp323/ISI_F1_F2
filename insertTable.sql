@@ -8,7 +8,8 @@ VALUES (1,'apicultor'),(2,'bom comunicador');
 
 INSERT INTO EMPRESA(id, url, nipc, nome, morada, codpostal, localidade)
 VALUES (1,'www.oferecemosexperiencia.pt',900000001, 'emp1', 'ali',1500300,'Lisboa'),
-(2,'www.camaraVilaNovaDaRabona.pt',900000002, 'emp2', 'Rua João Magalhães Nº1',2200200,'Vila Nova da Rabona');
+(2,'www.camaraVilaNovaDaRabona.pt',900000002, 'emp2', 'Rua João Magalhães Nº1',2200200,'Vila Nova da Rabona'),
+(3,'www.vazio.pt',900000001, 'emp3', 'aqui',1500320,'Lisboa');
 
 ALTER TABLE EQUIPA DROP constraint if EXISTS resp_pessoa;
 INSERT INTO EQUIPA(codigo, localizacao, responsavel)
@@ -22,8 +23,9 @@ VALUES (1,'ok@pt','individuo','1995-02-03',33333333,'ali ao lado',1200300,'Aqui'
 (3,'valadas@rabona.pt','Ezequiel Valadas','2000-01-01',111111111,'Rua João Magalhães Nº1',2200200,'Vila Nova da Rabona','presidente da camara',2,2),
 (4,'apontamentosSrAmerico@sapo.pt','Sr Américo','1995-05-05',222222222,'Rua dos Maias Nº25',2100222,'Lisboa','Educador de calões',2,2),
 (5,'manuel@sapo.pt','Manuel Fernandes','1993-02-08',222222222,'Rua alguidar Nº2',2100222,'Lisboa','Exemplo de AR',3,1),
-(6,'ser@sapo.pt','ser vivo','1977-12-21',222222202,'Rua ali Nº1',2101222,'Canelas','Companheiro de exemplo',3,1)
-;
+(6,'ser@sapo.pt','ser vivo','1977-12-21',222222202,'Rua ali Nº1',2101222,'Canelas','Companheiro de exemplo',3,1),
+(7,'1@sapo.pt','Maior da sua aldeia','1987-02-20',222221202,'Rua ali ao lado Nº1',2101212,'Canidelo','Influencer digital entre aspas aereas',2,2);
+
 ALTER table if EXISTS EQUIPA
 ADD constraint resp_pessoa foreign KEY (responsavel) references PESSOA(id) DEFERRABLE INITIALLY DEFERRED;
 

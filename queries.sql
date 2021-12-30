@@ -7,10 +7,10 @@ select nome, email, profissao from (PESSOA right outer join COMP_PESSOA on PESSO
 select nome, email, profissao from (PESSOA right outer join COMP_PESSOA on PESSOA.id = COMP_PESSOA.pessoa) group by competencia, nome, email, profissao order by competencia asc;
 
 --c)
--- considera empregados sem empresa e empresas sem empregados
-select empresa.nome, nipc, url, PESSOA.nome from (EMPRESA full outer join PESSOA on EMPRESA.id = PESSOA.empresa);
--- considera que não existem empregados sem empres, mas que podem existir empresas sem empregados
+-- considera que não podem existir empresas sem empregados
 select empresa.nome, nipc, url, PESSOA.nome from (EMPRESA left outer join PESSOA on EMPRESA.id = PESSOA.empresa);
+-- considera que podem existir empresas sem empregados
+select empresa.nome, nipc, url, PESSOA.nome from (EMPRESA inner join PESSOA on EMPRESA.id = PESSOA.empresa);
 
 --d)
 select ACTIVO.nome, PESSOA.equipa, PESSOA.nome from 
@@ -52,7 +52,7 @@ from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id inne
 group by id, nome,valor,dtvcomercial order by id,dtvcomercial desc;
 
 --A QUERRY SEGUINTE CRIA UMA VISTA CONSIDERANDO QUE NÃO PODEM EXISTIR ACTIVOS SEM VALOR COMERCIAL O QUE COMO JÁ FOI MENCIONADO SERIA ALCANÇADO TAMBÉM ALTERANDO APENAS OS JOINS
-select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
+create view intervencoes_sem_activos_semvalorcomercial as select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
 from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id inner join VCOMERCIAL on id = VCOMERCIAL.activo) 
 group by id, nome,valor,dtvcomercial,valcusto having valcusto >1 order by id,dtvcomercial desc;
 
