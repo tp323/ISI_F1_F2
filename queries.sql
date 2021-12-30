@@ -46,10 +46,15 @@ from (INTER_EQUIPA as IE join INTERVENCAO on IE.intervencao=INTERVENCAO.noint jo
 where date_part('year', dtinicio) = date_part('year', CURRENT_DATE) -1;
 
 --3.f)
---O LEFT OUTER JOIN PODERIA SER SUBSTITUIDOS POR INNER JOIN SE CONSIDERÁSSEMOS QUE NÃO É POSSIVEL EXISTIR ACTIVOS SEM VALOR COMERCIAL
+--O RIGHT OUTER JOIN PODERIA SER SUBSTITUIDO POR INNER JOIN SE CONSIDERÁSSEMOS QUE NÃO É POSSIVEL EXISTIR ACTIVOS SEM VALOR COMERCIAL
 create view intervencoes as select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
-from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id left outer join VCOMERCIAL on id = VCOMERCIAL.activo) 
+from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id inner join VCOMERCIAL on id = VCOMERCIAL.activo) 
 group by id, nome,valor,dtvcomercial order by id,dtvcomercial desc;
+
+--A QUERRY SEGUINTE CRIA UMA VISTA CONSIDERANDO QUE NÃO PODEM EXISTIR ACTIVOS SEM VALOR COMERCIAL O QUE COMO JÁ FOI MENCIONADO SERIA ALCANÇADO TAMBÉM ALTERANDO APENAS OS JOINS
+select distinct on (id) id, nome, current_date as data_atual, valor as valor_comercia_atual, sum(valcusto) as valor_total_intervencoes  
+from (INTERVENCAO right outer join ACTIVO on INTERVENCAO.activo = ACTIVO.id inner join VCOMERCIAL on id = VCOMERCIAL.activo) 
+group by id, nome,valor,dtvcomercial,valcusto having valcusto >1 order by id,dtvcomercial desc;
 
 --4
 --CASO O ACTIVO NÃO EXISTISSE NA BD PODERIA SER INSERIDO COM OS SEGUINTES COMANDOS, QUE NÃO É O CASO
